@@ -1,6 +1,8 @@
 package Assignment2.Facade;
 
+import Assignment2.Bridge.DocumentRenderer;
 import Assignment2.Bridge.RenderEngine;
+import Assignment2.Bridge.SimpleDocumentRenderer;
 import Assignment2.Decorator.WatermarkDecorator;
 import Assignment2.Document;
 import Assignment2.Flyweight.DocumentFactory;
@@ -32,8 +34,8 @@ public class DocumentFacade {
     //Создайте объект рендерера, передав в конструктор выбранный движок рендеринга.
     //Вызовите метод рендеринга в рендерере для заданного документа.
     public void renderDocument(String filename, RenderEngine engine) {
-        engine.render(filename);
+        DocumentRenderer renderer = new SimpleDocumentRenderer(engine);
+        renderer.render(filename);
     }
-
 }
 

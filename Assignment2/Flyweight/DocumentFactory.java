@@ -1,6 +1,7 @@
 package Assignment2.Flyweight;
 
 import Assignment2.Document;
+import Assignment2.Proxy.ProxyDocument;
 import Assignment2.RealDocument;
 
 import java.util.HashMap;
@@ -13,12 +14,11 @@ public class DocumentFactory {
     // Задача: Реализуйте фабрику, которая будет хранить и переиспользовать документы,
     // чтобы не создавать их повторно для одного и того же заголовка.
     public static Document getDocument(String docName) {
-        if (!documentMap.containsKey(docName)) {
-            Document document = new RealDocument(docName);
-            documentMap.put(docName, document);
-            System.out.println("Creating new document: " + docName);
+        if (documentMap.containsKey(docName)) {
+            return documentMap.get(docName);
         } else {
-            System.out.println("Reusing existing document: " + docName);
+            Document document = new ProxyDocument(docName);  // исправление
+            documentMap.put(docName, document);
         }
         return documentMap.get(docName);
     }
